@@ -1,16 +1,21 @@
 return function()
-    print("👁️ ESP Script Loaded!")
+    print("👁️ REAL ESP Loaded - Highlighting ALL players!")
     
-    -- Simple ESP test
     local Players = game:GetService("Players")
-    local player = Players.LocalPlayer
     
-    if player.Character then
-        local highlight = Instance.new("Highlight")
-        highlight.FillColor = Color3.new(0, 1, 0)
-        highlight.OutlineColor = Color3.new(1, 1, 1)
-        highlight.FillTransparency = 0.5
-        highlight.Parent = player.Character
-        print("✅ Green highlight added to your character!")
+    -- Highlight all other players
+    for _, otherPlayer in pairs(Players:GetPlayers()) do
+        if otherPlayer ~= Players.LocalPlayer then  -- Skip yourself
+            if otherPlayer.Character then
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "PlayerESP"
+                highlight.FillColor = Color3.fromRGB(255, 0, 0)  -- Red
+                highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                highlight.FillTransparency = 0.5
+                highlight.Parent = otherPlayer.Character
+            end
+        end
     end
+    
+    print("✅ ESP ON - All other players highlighted in RED!")
 end
